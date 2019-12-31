@@ -1,10 +1,15 @@
 language: node_js
 node_js: stable
 
+cache:
+    directories:
+    - node_modules
+
 install:
     - npm install
 
 script:
+    - hexo clean
     - hexo g
 
 after_script:
@@ -14,11 +19,11 @@ after_script:
     - git config user.email "myfsnow@163.com"
     - git add .
     - git commit -m "Update docs"
-    - git push --force --quiet "https://${ahrihexo}@${GH_REF}" master:master
+    - git push --force --quiet "https://${ahrihexo}@${GH_REF}" master:gh-pages
 
 branches:
     only:
-        - blog-resource
+        - master
 env:
     global:
         - GH_REF: github.com/fox-ahri/ahrihexo.git
